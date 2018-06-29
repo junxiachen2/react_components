@@ -1,0 +1,113 @@
+.container{
+  width: 100%;
+  text-align: center;
+}
+.ball{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100%;
+  background: #faf;
+  margin: 200rpx auto;
+}
+.animContainer{
+  width: 350rpx;
+  height: 350rpx;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 4rpx solid #ddd;
+  margin: 50rpx auto;
+}
+.animContainerWithAnim{
+  composes: animContainer;
+  animation: laiseeOpenAnim 2s infinite;
+}
+.btn{
+  width: 140rpx;
+  height: 40rpx;
+  line-height: 42rpx;
+  font-size: 28rpx;
+  border: 2rpx solid #aaa;
+  text-align: center;
+  border-radius: 50px;
+  margin: 50rpx auto;
+}
+@keyframes laiseeOpenAnim{
+  0% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open0.png);
+  }
+  4%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open1.png);
+  }
+  8%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open2.png);
+  }
+  12%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open3.png);
+  }
+  16%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open4.png);
+  }
+  20%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open5.png);
+  }
+  24%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open6.png);
+  }
+  28%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open7.png);
+  }
+  32%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open8.png);
+  }
+  36%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open9.png);
+  }
+  40%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open10.png);
+  }
+  44%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open11.png);
+  }
+  48%{
+    background-image: url(../../images/laiseeOpenAnim/laisee_open12.png);
+  }
+  52% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open13.png);
+  }
+  56% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open14.png);
+  }
+  60% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open15.png);
+  }
+  64% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open16.png);
+  }
+  68% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open17.png);
+  }
+  72% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open18.png);
+  }
+  76% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open19.png);
+  }
+  80% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open20.png);
+  }
+  84% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open21.png);
+  }
+  88% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open22.png);
+  }
+  92% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open23.png);
+  }
+  96% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open24.png);
+  }
+  100% {
+    background-image: url(../../images/laiseeOpenAnim/laisee_open0.png);
+  }
+}

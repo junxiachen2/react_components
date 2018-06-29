@@ -1,0 +1,19 @@
+{
+  "routers":[
+    {
+      "name":"home",
+      "template":"index"
+    }
+  ],
+  "templatePaths": [],
+  "consoleConfig":false,
+  "netWork":{
+    "port":"8080"
+  },
+  "publicPath":"assets/",
+  "myProxy":[{
+    "router":"api",
+    "url":"http://cnodejs.org"
+  }],
+  "common":"http://static.app-remix.com/common/pfrr.1523972959720.js"
+}
