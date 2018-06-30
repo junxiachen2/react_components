@@ -23,7 +23,7 @@ const preLoadImages = (urlArr) => {
       loadImage(url)
     }))
       .then(() => {
-        console.log('所有图片加载完毕')
+        // console.log('所有图片加载完毕')
         resolve()
       })
       .catch(e => {
