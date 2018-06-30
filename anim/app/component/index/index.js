@@ -1,10 +1,11 @@
 'use strict'
+import React from 'react'
 import style from './css.css'
-import Animator from '../../components/animator/animator.js'
+import Animator from '../../utils/animator.js'
 
-const { View } = window.QUI
-const staticPrefix = 'https://static.app-remix.com/activityWeb/activityLaiseeCarnival/assets/images/'
-const loadImage = (url) => {
+const staticPrefix =
+  'https://static.app-remix.com/activityWeb/activityLaiseeCarnival/assets/images/'
+const loadImage = url => {
   return new Promise((resolve, reject) => {
     const img = new Image()
     img.onload = () => {
@@ -17,11 +18,13 @@ const loadImage = (url) => {
     img.src = url
   })
 }
-const preLoadImages = (urlArr) => {
+const preLoadImages = urlArr => {
   return new Promise((resolve, reject) => {
-    Promise.all(urlArr.map((url) => {
-      loadImage(url)
-    }))
+    Promise.all(
+      urlArr.map(url => {
+        loadImage(url)
+      })
+    )
       .then(() => {
         // console.log('所有图片加载完毕')
         resolve()
@@ -32,31 +35,34 @@ const preLoadImages = (urlArr) => {
   })
 }
 
-class Index extends React.Component {
-  state = {
-    hasLoadImagesCss: false
+class App extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      hasLoadImagesCss: false
+    }
+    this.circle = null
+    this.circleAnimator = null
+    this.isLoop = true
+
+    this.laisee = null
+    this.laiseeAnimator = null
+    this.lastLaiseeIdx = null
+    this.hasLoadImages = false
   }
 
-  circle = null
-  circleAnimator = null
-  isLoop = true
-
-  laisee = null
-  laiseeAnimator = null
-  lastLaiseeIdx = null
-  hasLoadImages = false
   componentDidMount () {
     const that = this
     if (!that.circle) return
     // const easeInOutBack = BezierEasing(0.68, -0.55, 0.265, 1.55)
-    this.circleAnimator = new Animator(2000, (p) => {
+    this.circleAnimator = new Animator(2000, p => {
       const tx = -100 * Math.sin(2 * Math.PI * p)
       const ty = -100 * Math.cos(2 * Math.PI * p)
 
       that.circle.style.transform = 'translate(' + tx + 'px,' + ty + 'px)'
     })
 
-    this.laiseeAnimator = new Animator(4000, (p) => {
+    this.laiseeAnimator = new Animator(4000, p => {
       const idx = Math.round(24 * p)
       if (that.lastLaiseeIdx === idx) return
       that.lastLaiseeIdx = idx
@@ -100,12 +106,27 @@ class Index extends React.Component {
   render () {
     const { hasLoadImagesCss } = this.state
     return (
-      <View className={style.container} >
-        <View className={style.ball} getRef={(res) => { this.circle = res }} tap={this._tapCircle.bind(this)}></View>
-        <View className={style[hasLoadImagesCss ? `animContainerWithAnim` : `animContainer`]} getRef={(res) => { this.laisee = res }}></View>
-        <View className={style.btn} tap={this._tapLaisee.bind(this)}>打开红包</View>
-      </View>
+      <div className={style.container}>
+        <div
+          className={style.ball}
+          ref={res => {
+            this.circle = res
+          }}
+          onClick={this._tapCircle.bind(this)}
+        />
+        <div
+          className={
+            style[hasLoadImagesCss ? `animContainerWithAnim` : `animContainer`]
+          }
+          ref={res => {
+            this.laisee = res
+          }}
+        />
+        <div className={style.btn} onClick={this._tapLaisee.bind(this)}>
+          打开红包
+        </div>
+      </div>
     )
   }
 }
-export default Index
+export default App
