@@ -5,7 +5,7 @@ var node_module_dir = path.resolve(__dirname, 'node_module')
 module.exports = {
   entry:[
     "whatwg-fetch",
-    path.resolve(__dirname, 'app/console.js'),
+    // path.resolve(__dirname, 'app/console.js'),
     path.resolve(__dirname, 'app/main.js')
   ],
   output: {

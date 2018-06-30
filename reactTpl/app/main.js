@@ -2,7 +2,7 @@
 import React from 'react'
 import {render} from 'react-dom'
 import App from './component'
-import './config/resize'
+import './uitls/resize'
 
 let main = function(){
 	render(<App />,document.getElementById('main'))
