@@ -6,8 +6,7 @@ const defaultObj = {
 class ChessBoard {
   constructor (obj) {
     this.obj = Object.assign(defaultObj, obj)
-    this.mappingArr = [] // 0代表没有走过，玩家1，玩家2
-
+    this.mappingArr = null
     this.reset()
   }
   reset () {
@@ -15,6 +14,7 @@ class ChessBoard {
   }
   // 映射棋盘
   mappingBoard () {
+    this.mappingArr = [] // 0代表没有走过，玩家1，玩家2
     const { mappingArr } = this
     const { row, column } = this.obj
     for (let i = 0; i < column; i++) {
