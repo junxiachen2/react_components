@@ -1,0 +1,13 @@
+.showMoreBtn{
+  width: 480rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background: #D2CEFF;
+  border-radius: 50px;
+  font-family: HYQiHei-IZS;
+  font-size: 40rpx;
+  font-weight: bolder;
+  color: #3127BA;
+  margin: 20rpx auto;
+}
