@@ -1,76 +1,79 @@
-var path = require('path')
-var webpack = require('webpack')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var node_module_dir = path.resolve(__dirname, 'node_module')
+const path = require('path')
+const nodeModuleDir = path.resolve(__dirname, 'node_module')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  mode: 'production',
   entry: {
-    app: ["whatwg-fetch",path.resolve(__dirname, 'app/main.js'), ]
+    app: [path.resolve(__dirname, 'app/main.js')]
   },
   output: {
-    path: path.resolve(__dirname, '/'),
+    path: path.resolve(__dirname, 'build/'),
     chunkFilename: '[name].[chunkhash:5].js',
-    // 这里需要根据服务器来更改，
     filename: 'app.[chunkhash:5].js'
   },
   module: {
     rules: [{
-        test: /\.(js|jsx)$/,
-        use: ["babel-loader"],
-        include: [path.resolve(__dirname, 'app')],
-        exclude: [node_module_dir],
-      },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract( {
-          use: ['css-loader?minimize&modules&localIdentName=_[local]_[hash:base64:5]',"postcss-loader"],
-        } ),
-        include: [ path.resolve( __dirname, 'app' ) ],
-        exclude: [ node_module_dir ],
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: 'file-loader?name=[name].[ext]&outputPath=../image/',
-        include: [ path.resolve( __dirname, 'app' ) ],
-        exclude: [ node_module_dir ],
-      }
-
+      test: /\.(js|jsx)$/,
+      use: ['babel-loader'],
+      include: [path.resolve(__dirname, 'app')],
+      exclude: [nodeModuleDir]
+    },
+    {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader?modules&localIdentName=_[local]_[hash:base64:5]',
+        {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            config: { path: path.resolve(__dirname, 'postcss.config.js') }
+          }
+        }
+      ],
+      include: [path.resolve(__dirname, 'app')],
+      exclude: [nodeModuleDir]
+    },
+    {
+      test: /\.(png|svg|jpg|gif)$/,
+      use: 'file-loader?name=[name].[ext]&outputPath=./image/',
+      include: [path.resolve(__dirname, 'app')],
+      exclude: [nodeModuleDir]
+    }
     ]
   },
-  node: {Buffer: false},
+  node: { Buffer: false },
+  optimization: {
+    minimizer: [
+      // we specify a custom UglifyJsPlugin here to get source maps in production
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          // 最紧凑的输出
+          beautify: false,
+          // 删除所有的注释
+          comments: false,
+          compress: {
+            // 在UglifyJs删除没有用到的代码时不输出警告
+            warnings: false,
+            // 删除所有的 `console` 语句
+            // 还可以兼容ie浏览器
+            drop_console: true,
+            // 内嵌定义了但是只用到一次的变量
+            collapse_vars: true,
+            // 提取出出现多次但是没有定义成变量去引用的静态值
+            reduce_vars: true
+          }
+        }
+      })
+    ]
+  },
   plugins: [
-    new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'false'))
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.LoaderOptionsPlugin({minimize: true}),
-    new webpack.optimize.UglifyJsPlugin({
-      // 最紧凑的输出
-      beautify: false,
-      // 删除所有的注释
-      comments: false,
-      compress: {
-        // 在UglifyJs删除没有用到的代码时不输出警告
-        warnings: false,
-        // 删除所有的 `console` 语句
-        // 还可以兼容ie浏览器
-        drop_console: true,
-        // 内嵌定义了但是只用到一次的变量
-        collapse_vars: true,
-        // 提取出出现多次但是没有定义成变量去引用的静态值
-        reduce_vars: true,
-      }
-    }),
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
-    }),
-    new ExtractTextPlugin({
-      filename:(getPath) => {
-        return getPath('../css/[name].[chunkhash:5].css').replace('css/js', 'css');
-      },
-      allChunks:true
-    }),
-  ],
+    new CleanWebpackPlugin('build'),
+    new HtmlWebpackPlugin({
+      template: 'index_tpl.html'
+    })
+  ]
 }

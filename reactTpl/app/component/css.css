@@ -5,3 +5,9 @@
   -webkit-user-select: none;
   font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "STHeitiSC-Light", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
+.banner{
+  width: 750rpx;
+  height: 492rpx;
+  background: #f0f0f0;
+  background-size: contain;
+}

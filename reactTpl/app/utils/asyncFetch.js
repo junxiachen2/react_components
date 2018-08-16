@@ -9,7 +9,7 @@ const asyncFetch = async function (obj) {
   const url = obj.url
   const method = obj.method || 'GET'
   const credentials = obj.credentials || CREDS
-  const body = obj.obj || null
+  const body = obj.data || null
   let confFetch = { method, credentials }
   if (method === 'POST') { confFetch = { method, credentials, body: JSON.stringify(body) } }
   return new Promise(function (resolve, reject) {

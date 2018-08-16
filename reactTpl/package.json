@@ -7,7 +7,8 @@
       "react"
     ],
     "plugins": [
-      "transform-runtime"
+      "transform-runtime",
+      "transform-react-remove-prop-types"
     ]
   },
   "eslintConfig": {
@@ -352,35 +353,42 @@
   "description": "make a new project with webpack",
   "main": "index.js",
   "scripts": {
-    "dep": "NODE_ENV='production' webpack -p --progress --colors --config webpack.production.config.js --json --profile > stats.json",
+    "dep": "NODE_ENV='production' webpack -p --progress --colors --config webpack.production.config.js ",
     "dev": "webpack-dev-server --devtool eval --progress --colors --content-base build"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^7.2.3",
+    "autoprefixer": "^9.1.1",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.2",
-    "babel-loader": "^7.1.2",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.14",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.28.7",
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.7.0",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.3.0",
+    "eslint-plugin-react": "^7.11.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.6",
-    "postcss-loader": "^2.0.9",
-    "style-loader": "^0.19.1",
+    "html-webpack-plugin": "^3.2.0",
+    "ip": "^1.1.5",
+    "postcss-adaptive": "^0.5.0",
+    "postcss-adaptive-rpx": "^1.0.2",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^0.22.1",
+    "uglifyjs-webpack-plugin": "^1.3.0",
     "vconsole": "^3.0.0",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "postcss-adaptive": "^0.5.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "babel-polyfill": "^6.26.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "whatwg-fetch": "^2.0.3"
   }
 }

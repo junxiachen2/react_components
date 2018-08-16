@@ -2,10 +2,10 @@
 import React from 'react'
 import style from './css.css'
 class App extends React.Component {
-  render() {
+  render () {
     return (
-      <div>
-        react tpl
+      <div className={style.text}>
+        <div className={style.banner}>React TPL</div>
       </div>
     )
   }
